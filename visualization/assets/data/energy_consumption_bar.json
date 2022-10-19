@@ -1,0 +1,68 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "description": "Stock prices of 5 Tech Companies over Time.",
+    "title": "The solar consumption in each country from 1990 to 2020 year",
+    "data": {
+        "url": "assets/data/world_energy_consumption.csv"
+    },
+    "width": "container",
+    "height": 500,
+    "mark": {
+        "type": "line",
+        "point": {
+            "filled": false,
+            "fill": "white"
+        }
+    },
+    "encoding": {
+        "x": {
+            "type": "quantitative",
+            "field": "year"
+        },
+        "y": {
+            "field": "solar_consumption",
+            "type": "quantitative",
+            "scale": {
+                "type": "linear"
+            }
+        },
+        "color": {
+            "field": "country",
+            "type": "nominal"
+        },
+        "tooltip": [
+            {
+                "field": "country",
+                "type": "nominal"
+            },
+            {
+                "field": "year",
+                "type": "nominal"
+            },
+            {
+                "field": "solar_consumption",
+                "title": "Solar consumption(TWH)",
+                "type": "quantitative",
+                "format": ".2f"
+            },
+            {
+                "field": "solar_electricity",
+                "title": "Solar electricity(TWH)",
+                "type": "quantitative",
+                "format": ".2f"
+            },
+            {
+                "field": "solar_share_elec",
+                "title": "Electricity from solar(%)",
+                "type": "quantitative",
+                "format": ".2f"
+            },
+            {
+                "field": "solar_energy_per_capita",
+                "title": "Solor per consumption(KW/h)",
+                "type": "quantitative",
+                "format": ".2f"
+            }
+        ]
+    }
+}

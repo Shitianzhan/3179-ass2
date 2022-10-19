@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/vega@5.21.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.2.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.20.2"></script>
+    <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+
+<body>
+    <header>
+        <div class="inner-header">
+            <div class="title-bar">
+                The energy consumption all over the world
+            </div>
+            <nav class="navbar">
+                <div>
+                    <a href="./index.html#chart1">Coal</a>
+                </div>
+                <div>
+                    <a href="./index.html#chart2">Wind</a>
+                </div>
+                <div>
+                    <a href="./index.html#chart3">Solar</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+    <div class="pane">
+        In this visualization task, I would analysis three topics about the hot energies: the first one is to show the
+        coal consumption over the world; the second one is that showing the wind consumption of each country;
+        The last one is to show the solar consumption of each country.
+        In this task, it would use two dataset to finish the visualization task, the first one is a vector data
+        which is used to draw the world map, the data source link is:
+        <p><a href="https://www.trafforddatalab.io/interactive_graphics_companion/data/countries.geojson"
+                class="link">https://www.trafforddatalab.io/interactive_graphics_companion/data/countries.geojson</a>
+        </p>
+        and the other one is the detail energy data set of different countries from 1990 to 2020 year, the data source
+        link is bellowing:
+        <p>
+            <a href="https://www.kaggle.com/datasets/pralabhpoudel/world-energy-consumption/download?datasetVersionNumber=1"
+                class="link">https://www.kaggle.com/datasets/pralabhpoudel/world-energy-consumption/download?datasetVersionNumber=1</a>
+        </p>
+    </div>
+    <div class="charts">
+        <div id="coal-consumption-map" class="chart"></div>
+    </div>
+    <div class="pane" style="background-color: orange; opacity: .8;">
+        <p>
+            From the choropleth world map above, it could find the color depth of each country is different. I use the
+            coal consumption to represent the color's depth,
+            the darker the color, the more coal consumption of this country. We could find that the consumption of coal
+            is gradually reducing from the 1990 to 2020 year
+            when we pull the year range slide, which has proved that each country is reducing the consumption of coal
+            because of the pollution, of course, most energy consumption
+            still come from coal in China. Howver, we could know the renewable energy is the trend, Every country is
+            exploring in this direction.
+        </p>
+    </div>
+    <div class="charts">
+        <div id="wind-consumption-map" class="chart"></div>
+    </div>
+    <div class="pane" style="background-color: teal; opacity: 0.8;">
+        In this section, I explore the development of the wind energy. From the map above, we could know that USA is the
+        most advanced country in the wind energy region. With the rapid
+        development of the techniques, more and more countries are paying the attention on the wind energy, especially
+        the USA, China and some countries in Europe.
+    </div>
+    <div class="charts">
+        <div id="solar-multiple-line-charts" class="chart"></div>
+    </div>
+    <div class="pane">
+        In all renewable energies, solar energy is also a hot energy which is a pure natural renewable energy, it can
+        help each country save money to the greatest extent. From the multiple line
+        charts, we could find that more and more countries are using solar energy to produce electricity in recent
+        years. I think this energy would play an important role in the development of all
+        the countries in the future.
+    </div>
+    <script type="text/javascript">
+        const path1 = "assets/data/coal_consumption_map.json";
+
+        vegaEmbed('#coal-consumption-map', path1).then(function (result) {
+        }).catch(console.error);
+
+        const path2 = "assets/data/wind_consumption_map.json";
+
+        vegaEmbed('#wind-consumption-map', path2).then(function (result) {
+        }).catch(console.error);
+
+        const path3 = "assets/data/energy_consumption_bar.json";
+
+        vegaEmbed('#solar-multiple-line-charts', path3).then(function (result) {
+        }).catch(console.error);
+    </script>
+</body>
+
+</html>

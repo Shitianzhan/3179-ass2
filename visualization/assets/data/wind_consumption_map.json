@@ -1,0 +1,124 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "description": "Basic choropleth (rate/ratio)",
+    "width": "container",
+    "height": 300,
+    "title": "The wind consumption in the world from 1990 to 2020 year",
+    "params": [
+        {
+            "name": "highlight",
+            "select": {
+                "type": "point",
+                "on": "mouseover"
+            }
+        },
+        {
+            "name": "year_selection",
+            "value": 1990,
+            "bind": {
+                "input": "range",
+                "min": 1990,
+                "max": 2020,
+                "step": 1,
+                "name": "Year range: "
+            }
+        }
+    ],
+    "projection": {
+        "type": "equirectangular"
+    },
+    "layer": [
+        {
+            "data": {
+                "url": "assets/data/world_energy_consumption.csv"
+            },
+            "transform": [
+                {
+                    "lookup": "iso_code",
+                    "from": {
+                        "data": {
+                            "url": "https://www.trafforddatalab.io/interactive_graphics_companion/data/countries.geojson",
+                            "format": {
+                                "property": "features"
+                            }
+                        },
+                        "key": "properties.country_code"
+                    },
+                    "as": "geo_map"
+                },
+                {
+                    "filter": "datum.year == year_selection"
+                }
+            ],
+            "mark": {
+                "type": "geoshape",
+                "stroke": "#5f5e5e",
+                "strokeWidth": 1
+            },
+            "encoding": {
+                "shape": {
+                    "field": "geo_map",
+                    "type": "geojson"
+                },
+                "color": {
+                    "field": "wind_consumption",
+                    "type": "quantitative",
+                    "scale": {
+                        "scheme": "teals"
+                    },
+                    "legend": {
+                        "title": "Wind consumption",
+                        "format": ".2f"
+                    }
+                },
+                "tooltip": [
+                    {
+                        "field": "country",
+                        "type": "nominal",
+                        "title": "Country"
+                    },
+                    {
+                        "field": "year",
+                        "type": "nominal",
+                        "title": "Year"
+                    },
+                    {
+                        "field": "wind_consumption",
+                        "type": "nominal",
+                        "title": "Wind consumption(TWH)",
+                        "format": ".2f"
+                    },
+                    {
+                        "field": "wind_share_energy",
+                        "type": "nominal",
+                        "title": "Wind consumption propotion(%)",
+                        "format": ".2f"
+                    },
+                    {
+                        "field": "wind_share_elec",
+                        "type": "nominal",
+                        "title": "Electricity from wind(%)",
+                        "format": ".2f"
+                    },
+                    {
+                        "field": "wind_energy_per_capita",
+                        "type": "nominal",
+                        "title": "Wind per consumption(KW/h)",
+                        "format": ".2f"
+                    }
+                ],
+                "strokeWidth": {
+                    "condition": [
+                        {
+                            "param": "highlight",
+                            "empty": false,
+                            "value": 1
+                        }
+                    ],
+                    "value": 0.5
+                }
+            }
+        }
+    ],
+    "config": {}
+}
